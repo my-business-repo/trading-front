@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.30869fff.css",
+    "main.js": "/static/js/main.0e42d6d1.js",
+    "static/media/slide3.jpg": "/static/media/slide3.66a9be59d340e7959df8.jpg",
+    "static/media/slide2.jpg": "/static/media/slide2.ac2605b0e31bb34b8309.jpg",
+    "static/media/help_center.png": "/static/media/help_center.294a4f58c832ec621ac2.png",
+    "static/media/quick_transaction.jpg": "/static/media/quick_transaction.bdc58f5d9ea2b3280419.jpg",
+    "static/media/future_trading.png": "/static/media/future_trading.066aabb526c68fea7c4e.png",
+    "static/media/sol.png": "/static/media/sol.40ad96d406849f753a45.png",
+    "static/media/slide1.jpg": "/static/media/slide1.986e2481d6cc1ad5a912.jpg",
+    "static/media/withdraw.png": "/static/media/withdraw.9292dbf69db1d5c20773.png",
+    "static/media/usdc.png": "/static/media/usdc.d887416a86ae8e2c817f.png",
+    "static/media/ada.png": "/static/media/ada.e83a06cfaab937db59d6.png",
+    "static/media/exchange.png": "/static/media/exchange.7817c265270a1b180209.png",
+    "static/media/deposit.png": "/static/media/deposit.a05f2fc5a31411c5c7f4.png",
+    "static/media/usdt.png": "/static/media/usdt.7c73353041e657fcdb92.png",
+    "static/media/empty.png": "/static/media/empty.cb91ed5dc7b7c2d7e858.png",
+    "static/media/shiba-inu-shib-logo.svg": "/static/media/shiba-inu-shib-logo.2791ed69b41323c866e39557cb7cabd0.svg",
+    "static/media/cardano-cryptocurrency.svg": "/static/media/cardano-cryptocurrency.3468397738457b31900379c7f2a31691.svg",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/litecoin-cryptocurrency.svg": "/static/media/litecoin-cryptocurrency.5dc2c3b2e417ef494ed31ee77afc7d53.svg",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "static/media/filecoin-iou-cryptocurrency.svg": "/static/media/filecoin-iou-cryptocurrency.63310dde6df0ae621e217edba92de939.svg",
+    "static/media/bitcoin-cryptocurrency.svg": "/static/media/bitcoin-cryptocurrency.eecdd08770b40dc229464570cdc09557.svg",
+    "static/media/polkadot-cryptocurrency.svg": "/static/media/polkadot-cryptocurrency.3449c0c6ee7c18e6c0af13b41e394855.svg",
+    "static/media/dogecoin-cryptocurrency.svg": "/static/media/dogecoin-cryptocurrency.f7e62d54652727a41dbe98b6b86e5fb9.svg",
+    "static/media/crypto-com-cryptocurrency.svg": "/static/media/crypto-com-cryptocurrency.76c84777a7fcaa21462a3851a70752d3.svg",
+    "index.html": "/index.html",
+    "static/media/ethereum-cryptocurrency.svg": "/static/media/ethereum-cryptocurrency.791b71cc046f1859643f415128690a22.svg",
+    "main.30869fff.css.map": "/static/css/main.30869fff.css.map",
+    "main.0e42d6d1.js.map": "/static/js/main.0e42d6d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.30869fff.css",
+    "static/js/main.0e42d6d1.js"
+  ]
+}
