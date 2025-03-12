@@ -43,14 +43,12 @@ const ProtectedRoute = ({ children }) => {
                     setToken(null);
                 }
             } catch (error) {
-                console.error('Token validation error:', error);
                 localStorage.removeItem('token');
                 setToken(null);
             }
         };
 
         if (token) {
-            console.log("token", token);
             validateToken();
         }
     }, [token, setToken]);
