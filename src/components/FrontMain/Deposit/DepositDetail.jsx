@@ -39,9 +39,9 @@ const dummyAddresses = {
     eth: '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
     usdt: '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
     usdc: '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
-    ada: 'DQ84Wfeq9yjJ4axcxp8vKY2yS5Ff942421',
-    sol: 'So11111111111111111111111111111111111111112',
-    xrp: 'rJ96ZfD3Y53z52Rp9b32Z1feq19HKgVp'
+    ada: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
+    sol: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
+    xrp: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8'
 };
 
 export default function DepositDetail() {

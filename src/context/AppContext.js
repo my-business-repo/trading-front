@@ -35,7 +35,7 @@ export const AppProvider = ({ children }) => {
     };
 
     return (
-        <AppContext.Provider value={{ token, customer, login, logout, theme, setTheme: updateTheme, currencyDataCtx, setCurrencyDataCtx, assetCtx, setAssetCtx }}>
+        <AppContext.Provider value={{ token, setToken, customer, login, logout, theme, setTheme: updateTheme, currencyDataCtx, setCurrencyDataCtx, assetCtx, setAssetCtx }}>
             {children}
         </AppContext.Provider>
     );
