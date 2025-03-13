@@ -8,9 +8,10 @@ import axios from 'axios';
 
 export default function AssetCard({ data, theme }) {
     const [estimatedValue, setEstimatedValue] = useState('********');
+    const [unknownCoinIcon, setUnknownCoinIcon] = useState('');
 
     const getCoinIcon = (symbol) => {
-        switch(symbol.toUpperCase()) {
+        switch (symbol.toUpperCase()) {
             case 'BTC':
                 return btcIcon;
             case 'ETH':
@@ -21,6 +22,21 @@ export default function AssetCard({ data, theme }) {
                 return usdcIcon;
             default:
                 return null;
+        }
+    };
+
+
+    const findCoinIcon = async (symbol) => {
+        if (symbol) {
+            const response = await axios.get('https://min-api.cryptocompare.com/data/pricemultifull', {
+                params: {
+                    fsyms: symbol,
+                    tsyms: 'USD'
+                }
+            });
+            const rawData = response.data.RAW;
+            setUnknownCoinIcon(`https://www.cryptocompare.com${rawData[symbol]["USD"].IMAGEURL}`);
+            return `https://www.cryptocompare.com${rawData[symbol]["USD"].IMAGEURL}`;
         }
     };
 
@@ -61,15 +77,23 @@ export default function AssetCard({ data, theme }) {
         }}>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <Box display="flex" alignItems="center" gap={1}>
-                    {getCoinIcon(data.name) && (
-                        <img 
-                            src={getCoinIcon(data.name)} 
+                    {getCoinIcon(data.name) ? (
+                        <img
+                            src={getCoinIcon(data.name)}
                             alt={data.name}
                             style={{ width: 24, height: 24 }}
                         />
+                    ) : (
+                        findCoinIcon(data.name) && (
+                            <img
+                                src={unknownCoinIcon}
+                                alt={data.name}
+                                style={{ width: 24, height: 24 }}
+                            />
+                        )
                     )}
-                    <Typography 
-                        variant="h6" 
+                    <Typography
+                        variant="h6"
                         color={theme === 'dark' ? 'white' : 'primary'}
                         sx={{ fontWeight: 600 }}
                     >
@@ -86,15 +110,15 @@ export default function AssetCard({ data, theme }) {
 
             <Box display='flex' justifyContent='space-between' gap={2}>
                 <Box sx={{ flex: 1 }}>
-                    <Typography 
-                        variant="caption" 
+                    <Typography
+                        variant="caption"
                         color={theme === 'dark' ? 'grey.400' : 'text.secondary'}
                         sx={{ mb: 0.5, display: 'block' }}
                     >
                         Available Balance
                     </Typography>
-                    <Typography 
-                        variant="body1" 
+                    <Typography
+                        variant="body1"
                         color={theme === 'dark' ? 'white' : 'primary.main'}
                         sx={{ fontWeight: 600 }}
                     >
@@ -103,15 +127,15 @@ export default function AssetCard({ data, theme }) {
                 </Box>
 
                 <Box sx={{ flex: 1 }}>
-                    <Typography 
-                        variant="caption" 
+                    <Typography
+                        variant="caption"
                         color={theme === 'dark' ? 'grey.400' : 'text.secondary'}
                         sx={{ mb: 0.5, display: 'block' }}
                     >
                         In Review
                     </Typography>
-                    <Typography 
-                        variant="body1" 
+                    <Typography
+                        variant="body1"
                         color="warning.main"
                         sx={{ fontWeight: 600 }}
                     >
@@ -120,15 +144,15 @@ export default function AssetCard({ data, theme }) {
                 </Box>
 
                 <Box sx={{ flex: 1 }}>
-                    <Typography 
-                        variant="caption" 
+                    <Typography
+                        variant="caption"
                         color={theme === 'dark' ? 'grey.400' : 'text.secondary'}
                         sx={{ mb: 0.5, display: 'block' }}
                     >
                         Estimated (USD)
                     </Typography>
-                    <Typography 
-                        variant="body1" 
+                    <Typography
+                        variant="body1"
                         color="success.main"
                         sx={{ fontWeight: 600 }}
                     >

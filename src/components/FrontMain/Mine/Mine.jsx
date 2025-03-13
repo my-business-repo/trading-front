@@ -50,8 +50,8 @@ export default function Mine() {
         } else if (menuId === 5) {
             navigate('/exchange-history');
         }
-        if (menuId === 4) {
-            navigate('/trade-history');
+        if (menuId === 4 && menuName === 'Change Password') {
+            navigate('/change-password');
         }
     };
 

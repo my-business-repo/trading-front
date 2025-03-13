@@ -10,6 +10,7 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import { Avatar } from '@mui/material';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import { CurrencyExchange } from '@mui/icons-material';
+import LockIcon from '@mui/icons-material/Lock';
 
 export const minemenu = [
     {
@@ -36,6 +37,12 @@ export const minemenu = [
         name: 'Order Records',
         status: null,
         icon: <AssignmentIcon style={{ color: '#01579b', fontSize: 45 }} />,
+    },
+    {
+        id: 4,
+        name: "Change Password",
+        status: null,
+        icon: <LockIcon style={{ color: '#616161', fontSize: 45 }} />,
     },
     // {
     //     id: 4,
