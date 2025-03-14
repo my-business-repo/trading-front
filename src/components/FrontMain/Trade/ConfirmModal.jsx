@@ -70,7 +70,7 @@ const DisplayCard = ({ s, p, selected, onClick }) => {
     )
 }
 
-export default function ConfirmModal({ focusCoin, tradeType, open, handleClose,setOpen }) {
+export default function ConfirmModal({ focusCoin, tradeType, open, handleClose, setOpen }) {
     const [currentPrice, setCurrentPrice] = useState(null);
     const [priceChange, setPriceChange] = useState(0);
     const [balance, setBalance] = useState("0");
@@ -97,7 +97,7 @@ export default function ConfirmModal({ focusCoin, tradeType, open, handleClose,s
     const fetchBalance = async () => {
         try {
             const baseUrl = process.env.REACT_APP_API_URL;
-            const response = await axios.get(`${baseUrl}/api/v1/customer/balance`, {
+            const response = await axios.get(`${baseUrl}/api/v1/customer/coin/balance?currency=USDT`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
@@ -148,12 +148,12 @@ export default function ConfirmModal({ focusCoin, tradeType, open, handleClose,s
                 setTimeLeft(prev => prev - 1);
                 setProgress((selectedTime - timeLeft) / selectedTime * 100);
                 // const outcome = Math.random() > 0.5 ? 'win' : 'lose';
-                const outcome = sequence[i]==1?'win':'lose';
+                const outcome = sequence[i] == 1 ? 'win' : 'lose';
                 setExpectedOutcome({
                     type: outcome,
                     value: outcome === 'win' ? parseFloat((amount * (ration[selectedTime] / 100)).toFixed(3)) : -amount
                 });
-                console.log('value i:',sequence[i]);
+                console.log('value i:', sequence[i]);
                 setI(i + 1);
             } else {
                 setOpen(false);
@@ -173,6 +173,13 @@ export default function ConfirmModal({ focusCoin, tradeType, open, handleClose,s
                 })
                     .then(response => {
                         if (response.status === 200 || response.status === 201) {
+
+                            console.log('response:', response.data);
+                            const expectedOutcome = {
+                                type: response.data.result,
+                                value: response.data.profit
+                            }
+
                             setTradeResult(expectedOutcome);
                             setShowResult(true);
                         } else {
@@ -522,7 +529,7 @@ export default function ConfirmModal({ focusCoin, tradeType, open, handleClose,s
                     <Box display='flex' flexDirection='column' alignItems="center">
                         <Box sx={{ display: 'flex', direction: 'column', alignItems: 'center', mt: 3 }}>
                             <Typography variant="h6" color={tradeResult?.type === 'win' ? 'success.main' : 'error.main'}>
-                                {tradeResult?.type === 'win' ? '+' : '-'}
+                                {tradeResult?.type === 'win' ? '+' : ''}
                             </Typography>
 
                             <Typography variant="h6" color={tradeResult?.type === 'win' ? 'success.main' : 'error.main'}>

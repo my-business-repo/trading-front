@@ -34,6 +34,7 @@ export default function WithdrawDetail() {
     const [loading, setLoading] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [transactionDetails, setTransactionDetails] = useState(null);
+    const [serviceCharge, setServiceCharge] = useState(0);
     const navigate = useNavigate();
 
     const coins = [
@@ -51,12 +52,15 @@ export default function WithdrawDetail() {
     const fetchBalance = async () => {
         try {
             const API_URL = process.env.REACT_APP_API_URL;
-            const response = await axios.get(`${API_URL}/api/v1/customer/balance`, {
+            const response = await axios.get(`${API_URL}/api/v1/customer/coin/balance?currency=${coin.toUpperCase()}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
                 }
             });
+
+            console.log(response.data);
+
             setBalance(response.data.balance);
         } catch (error) {
             toast.error('Failed to fetch balance');
@@ -92,6 +96,10 @@ export default function WithdrawDetail() {
                     'Content-Type': 'application/json'
                 }
             });
+
+
+            console.log("withdraw response:", response.data);
+
             toast.success('Withdrawal request submitted');
             setTransactionDetails(response.data.transaction);
             setConfirmOpen(false);
@@ -112,8 +120,28 @@ export default function WithdrawDetail() {
     };
 
     const fee = fees[coin.toLowerCase()] || 0;
-    const receivedAmount = amount ? (parseFloat(amount) - fee) : 0;
+    const receivedAmount = amount ? (parseFloat(amount) - serviceCharge) : 0;
     const usdValue = rate ? (receivedAmount * (1 / rate)).toFixed(2) : 0;
+
+
+    const renderEndAdornment = () => {
+        return (
+            <>
+                <InputAdornment position="end">
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: "center" }}>
+                        <Typography variant="body2" color="primary" gutterBottom>
+                            {coin.toUpperCase()}
+                        </Typography> |
+                        <a
+                            onClick={() => setAmount(balance)}
+                            style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>
+                            ALL
+                        </a>
+                    </Box>
+                </InputAdornment>
+            </>
+        );
+    };
 
     return (
         <Container maxWidth="sm" sx={{ mt: 2, mb: 4 }}>
@@ -133,7 +161,7 @@ export default function WithdrawDetail() {
                         Available Balance
                     </Typography>
                     <Typography variant="h6" color="primary">
-                        {balance} USDT
+                        {balance} {coin.toUpperCase()}
                     </Typography>
                 </Box>
 
@@ -167,11 +195,15 @@ export default function WithdrawDetail() {
                     label="Amount"
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => {
+                        setAmount(e.target.value);
+                        // 1% service charge
+                        setServiceCharge(e.target.value * 0.01);
+                    }}
                     margin="normal"
                     variant="outlined"
                     InputProps={{
-                        endAdornment: <InputAdornment position="end">{coin.toUpperCase()}</InputAdornment>,
+                        endAdornment: renderEndAdornment(),
                     }}
                 />
 
@@ -181,10 +213,10 @@ export default function WithdrawDetail() {
                     </Typography>
                     <Box display="flex" justifyContent="space-between" mb={1}>
                         <Typography variant="body2">Service Charge</Typography>
-                        <Typography variant="body2">{fee} {coin.toUpperCase()}</Typography>
+                        <Typography variant="body2">{serviceCharge} {coin.toUpperCase()}</Typography>
                     </Box>
                     <Box display="flex" justifyContent="space-between" mb={1}>
-                        <Typography variant="body2">You Will Receive</Typography>
+                        <Typography variant="body2">Amount of arrived</Typography>
                         <Typography variant="body2" color="primary">
                             {receivedAmount} {coin.toUpperCase()}
                         </Typography>
@@ -241,8 +273,15 @@ export default function WithdrawDetail() {
                         <Typography variant="body1">Transaction ID: {transactionDetails.transactionId}</Typography>
                         <Typography variant="body1">Amount: {transactionDetails.amount} {transactionDetails.currency}</Typography>
                         <Box display="flex" alignItems="center">
-                            <Chip label={transactionDetails.status} style={{ backgroundColor: transactionDetails.status === 'PENDING' ? 'gray' : undefined }}
-                             color={transactionDetails.status === 'PENDING' ? 'white' : 'error'} />
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    color: transactionDetails.status.toUpperCase() === 'PENDING' ? 'gray' : 'error.main',
+                                    fontWeight: 'medium'
+                                }}
+                            >
+                                {transactionDetails.status}
+                            </Typography>
                         </Box>
                     </DialogContent>
                     <DialogActions>

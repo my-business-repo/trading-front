@@ -10,7 +10,7 @@ import {
     IconButton,
     CircularProgress
 } from '@mui/material';
-import { Visibility, VisibilityOff, WbSunny, Nightlight } from '@mui/icons-material'; // Importing theme icons
+import { Visibility, VisibilityOff, WbSunny, Nightlight, ArrowBack } from '@mui/icons-material'; // Added ArrowBack
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -28,7 +28,7 @@ export default function SignUp() {
         password: '',
         confirmPassword: ''
     });
-    const [loading, setLoading] = useState(false); // New loading state
+    const [loading, setLoading] = useState(false);
     const { theme, setTheme } = useAppContext();
 
     const handleChange = (e) => {
@@ -46,10 +46,9 @@ export default function SignUp() {
             return;
         }
 
-        // get API_URL from .env
         const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://localhost:3001';
 
-        setLoading(true); // Set loading to true when submitting
+        setLoading(true);
 
         try {
             const response = await axios.post(`${API_URL}/api/v1/customer/signup`, {
@@ -72,12 +71,12 @@ export default function SignUp() {
             console.error('Signup failed:', error);
             toast.error('Signup failed : ' + error.response.data.error);
         } finally {
-            setLoading(false); // Reset loading state
+            setLoading(false);
         }
     };
 
     const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark'); // Toggle between light and dark theme
+        setTheme(theme === 'dark' ? 'light' : 'dark');
     };
 
     return (
@@ -90,11 +89,17 @@ export default function SignUp() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 background: theme === 'dark' ? '#121212' : '#fff',
-                borderRadius: '10px'
+                borderRadius: '10px',
+                position: 'relative'
             }}>
                 <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-                    <IconButton onClick={toggleTheme} sx={{ position: 'absolute', top: 16, right: 16 }}>
+                    <IconButton onClick={toggleTheme}>
                         {theme === 'dark' ? <WbSunny sx={{ color: '#fff' }} /> : <Nightlight sx={{ color: 'primary.main' }} />}
+                    </IconButton>
+                </Box>
+                <Box sx={{ position: 'absolute', top: 16, left: 16 }}>
+                    <IconButton onClick={() => navigate(-1)}>
+                        <ArrowBack sx={{ color: theme === 'dark' ? '#fff' : 'primary.main' }} />
                     </IconButton>
                 </Box>
                 <Typography component="h1" variant="h5" sx={{ mb: 2, color: theme === 'dark' ? '#fff' : 'primary.main' }}>
@@ -255,9 +260,9 @@ export default function SignUp() {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 2, mb: 1, borderRadius: '10px' }}
-                        disabled={loading} // Disable button when loading
+                        disabled={loading}
                     >
-                        {loading ? <CircularProgress size={24} /> : 'Sign Up'}
+                        {loading ? <CircularProgress size={24} /> : 'Register'}
                     </Button>
                     <Button
                         fullWidth

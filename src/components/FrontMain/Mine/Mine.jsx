@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAppContext } from "../../../context/AppContext";
+import LogoImg from "../../../images/logo.jpg";
 
 export default function Mine() {
     const navigate = useNavigate();
@@ -72,14 +73,14 @@ export default function Mine() {
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
                         <Avatar
                             sx={{ width: 50, height: 50, border: '2px solid white' }}
-                            src="https://placekitten.com/200/200"
+                            src={LogoImg}
                         />
                         <Box>
                             <Typography variant="h6" color='white' sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>
                                 {profileData.name}
                             </Typography>
-                            <Typography variant="body2" color='white' sx={{ fontSize: '0.9rem' }}>
-                                ID: {profileData.loginId}
+                            <Typography variant="h6" color='white' sx={{ fontSize: '0.9rem' }}>
+                                User ID: {profileData.loginId}
                             </Typography>
                         </Box>
                     </Box>

@@ -69,7 +69,6 @@ export default function Exchange({setValue}) {
 
     const fetchUserBalance = async () => {
         try {
-            console.log('from coin : ', fromCoin);
             const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
             const response = await axios.get(`${API_URL}/api/v1/customer/coin/balance?currency=${fromCoin}`, {
                 headers: {

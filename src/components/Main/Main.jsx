@@ -24,6 +24,7 @@ import { useAppContext } from '../../context/AppContext';
 import Orders from "../FrontMain/Orders/Orders";
 import { useEffect } from 'react';
 import axios from 'axios';
+import BottomNavi from "../BottomNavi/BottomNavi";
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -62,9 +63,13 @@ const ProtectedRoute = ({ children }) => {
 export default function Main() {
     const location = useLocation();
     const isAuthPage = ['/signup', '/signin', '/trade/0'].includes(location.pathname);
+
+    const isSignInSignupPage = ['/signup', '/signin'].includes(location.pathname);
+
     const { theme } = useAppContext();
 
     return (
+        <>
         <Box sx={{ height: '100%', width: '100%', overflow: 'auto', marginTop: isAuthPage ? 0 : 5, background: theme === 'dark' ? '#121212' : '' }}>
             <Box sx={{ width: '99%', minHeight: '100%', background: theme === 'dark' ? '#1e1e1e' : '#eeeeee', padding: 0, border: '1px solid transparent' }}>
                 {!isAuthPage && <TopBar />}
@@ -93,5 +98,7 @@ export default function Main() {
                 </Box>
             </Box>
         </Box>
+        {!isSignInSignupPage && <BottomNavi />}
+        </>
     )
 };

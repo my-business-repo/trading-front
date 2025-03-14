@@ -10,7 +10,7 @@ import {
     IconButton,
     CircularProgress
 } from '@mui/material';
-import { Visibility, VisibilityOff, WbSunny, Nightlight } from '@mui/icons-material';
+import { Visibility, VisibilityOff, WbSunny, Nightlight, ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -83,11 +83,17 @@ export default function SignIn() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                background: theme === 'dark' ? '#121212' : '#fff'
+                background: theme === 'dark' ? '#121212' : '#fff',
+                position: 'relative'
             }}>
                 <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-                    <IconButton onClick={toggleTheme} sx={{ position: 'absolute', top: 16, right: 16 }}>
+                    <IconButton onClick={toggleTheme}>
                         {theme === 'dark' ? <WbSunny sx={{ color: '#fff' }} /> : <Nightlight sx={{ color: 'primary.main' }} />}
+                    </IconButton>
+                </Box>
+                <Box sx={{ position: 'absolute', top: 16, left: 16 }}>
+                    <IconButton onClick={() => navigate(-1)}>
+                        <ArrowBack sx={{ color: theme === 'dark' ? '#fff' : 'primary.main' }} />
                     </IconButton>
                 </Box>
                 <Typography component="h1" variant="h5" sx={{ mb: 2, color: theme === 'dark' ? '#fff' : 'primary.main' }} >

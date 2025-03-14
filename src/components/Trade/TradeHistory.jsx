@@ -76,6 +76,7 @@ export default function TradeHistory() {
                     'Content-Type': 'application/json'
                 }
             });
+            console.log(response.data);
             setTrades(response.data);
         } catch (error) {
             toast.error('Failed to load trade history');
