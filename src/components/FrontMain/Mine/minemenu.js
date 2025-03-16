@@ -11,6 +11,7 @@ import { Avatar } from '@mui/material';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import { CurrencyExchange } from '@mui/icons-material';
 import LockIcon from '@mui/icons-material/Lock';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const minemenu = [
     {
@@ -79,6 +80,12 @@ export const minemenu = [
         name: 'Suggestions',
         status: null,
         icon: <FeedbackIcon style={{ color: '#00b0ff', fontSize: 45 }} />,
+    },
+    {
+        id: 12,
+        name: 'General Settings',
+        status: null,
+        icon: <SettingsIcon style={{ color: '#0091ea', fontSize: 45 }} />,
     },
     {
         id: 7,

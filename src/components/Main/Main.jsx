@@ -25,6 +25,9 @@ import Orders from "../FrontMain/Orders/Orders";
 import { useEffect } from 'react';
 import axios from 'axios';
 import BottomNavi from "../BottomNavi/BottomNavi";
+import GeneralSettings from "../FrontMain/Settings/GeneralSettings";
+import SetFundPassword from "../FrontMain/Settings/SetFundPassword";
+import ModifyFundPassword from "../FrontMain/Settings/ModifyFundPassword";
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -94,6 +97,9 @@ export default function Main() {
                         <Route path='/exchange-history' element={<ProtectedRoute><ExchangeHistory /></ProtectedRoute>} />
                         <Route path='/change-password' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
                         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+                        <Route path='/general-settings' element={<ProtectedRoute><GeneralSettings /></ProtectedRoute>} />
+                        <Route path='/set-fund-password' element={<ProtectedRoute><SetFundPassword /></ProtectedRoute>} />
+                        <Route path='/modify-fund-password' element={<ProtectedRoute><ModifyFundPassword /></ProtectedRoute>} />
                     </Routes>
                 </Box>
             </Box>

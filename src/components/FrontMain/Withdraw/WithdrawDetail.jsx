@@ -24,6 +24,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import back button icon
 import IconButton from '@mui/material/IconButton'; // Import IconButton
+import NumPadDrawer from './NumPad';
 
 export default function WithdrawDetail() {
     const [coin, setCoin] = useState('usdt');
@@ -32,7 +33,13 @@ export default function WithdrawDetail() {
     const [amount, setAmount] = useState('');
     const [rate, setRate] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const [numPadOpen, setNumPadOpen] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
+
+    const [isFundPasswordSet, setIsFundPasswordSet] = useState(false);
+
+
     const [transactionDetails, setTransactionDetails] = useState(null);
     const [serviceCharge, setServiceCharge] = useState(0);
     const navigate = useNavigate();
@@ -48,6 +55,22 @@ export default function WithdrawDetail() {
         fetchBalance();
         fetchRate();
     }, [coin]);
+
+
+    const checkFundPassword = async () => {
+        const API_URL = process.env.REACT_APP_API_URL;
+        const response = await axios.get(`${API_URL}/api/v1/customer/is-set-fund-password`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        setIsFundPasswordSet(response.data.isSet);
+    }
+
+    useEffect(() => {
+        checkFundPassword();
+    }, []);
 
     const fetchBalance = async () => {
         try {
@@ -96,10 +119,6 @@ export default function WithdrawDetail() {
                     'Content-Type': 'application/json'
                 }
             });
-
-
-            console.log("withdraw response:", response.data);
-
             toast.success('Withdrawal request submitted');
             setTransactionDetails(response.data.transaction);
             setConfirmOpen(false);
@@ -142,6 +161,15 @@ export default function WithdrawDetail() {
             </>
         );
     };
+
+
+    const handleWithdrawClick = () => {
+        setNumPadOpen(true);
+        if (!isFundPasswordSet) {
+            navigate('/set-fund-password');
+        }
+
+    }
 
     return (
         <Container maxWidth="sm" sx={{ mt: 2, mb: 4 }}>
@@ -233,7 +261,7 @@ export default function WithdrawDetail() {
                     fullWidth
                     variant="contained"
                     size="large"
-                    onClick={() => setConfirmOpen(true)}
+                    onClick={handleWithdrawClick}
                     disabled={!address || !amount || loading}
                     sx={{ mt: 2 }}
                 >
@@ -302,6 +330,7 @@ export default function WithdrawDetail() {
                     </DialogActions>
                 </Dialog>
             )}
+            <NumPadDrawer open={numPadOpen} setOpen={setNumPadOpen} setConfirmOpen={setConfirmOpen} />
         </Container>
     );
 }
