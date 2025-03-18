@@ -23,7 +23,7 @@ import { useAppContext } from '../../../context/AppContext';
 export default function Home() {
     const navigate = useNavigate();
     const [currencyData, setCurrencyData] = useState([]);
-    const { theme,setTheme } = useAppContext();
+    const { theme, setTheme } = useAppContext();
 
     useEffect(() => {
         const fetchCryptoPairs = async () => {
@@ -34,7 +34,7 @@ export default function Home() {
                         tsyms: 'USDT'
                     }
                 });
-                const rawData = response.data.RAW; 
+                const rawData = response.data.RAW;
 
                 const formattedData = Object.entries(rawData).map(([symbol, data]) => ({
                     name: symbol,
@@ -55,7 +55,7 @@ export default function Home() {
 
         return () => clearInterval(interval);
 
-        
+
     }, []);
 
     const settings = {
@@ -132,21 +132,21 @@ export default function Home() {
                         </Typography>
                     </Grid>
                     <Grid item xs={4} display="flex" flexDirection="column" alignItems="center">
-                        <AccountBalanceWalletIcon 
-                            sx={{ 
-                                fontSize: 50, 
-                                color: isDarkTheme ? '#03a9f4' : '#1976d2', 
-                                transition: 'transform 0.3s', 
+                        <AccountBalanceWalletIcon
+                            sx={{
+                                fontSize: 50,
+                                color: isDarkTheme ? '#03a9f4' : '#1976d2',
+                                transition: 'transform 0.3s',
                                 cursor: 'pointer',
-                                '&:hover': { transform: 'scale(1.1)' } 
+                                '&:hover': { transform: 'scale(1.1)' }
                             }}
                             onClick={() => navigate('/withdraw')}
                         />
-                        <Typography 
-                            variant="body1" 
-                            component="div" 
-                            sx={{ 
-                                color: isDarkTheme ? '#03a9f4' : '#1976d2', 
+                        <Typography
+                            variant="body1"
+                            component="div"
+                            sx={{
+                                color: isDarkTheme ? '#03a9f4' : '#1976d2',
                                 fontWeight: 'bold',
                                 cursor: 'pointer'
                             }}
@@ -156,10 +156,15 @@ export default function Home() {
                         </Typography>
                     </Grid>
                     <Grid item xs={4} display="flex" flexDirection="column" alignItems="center">
-                        <SupportAgentRoundedIcon sx={{ fontSize: 50, color: isDarkTheme ? '#4caf50' : '#388e3c', transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.1)' } }} />
-                        <Typography variant="body1" component="div" sx={{ color: isDarkTheme ? '#4caf50' : '#388e3c', fontWeight: 'bold' }}>
-                            Support
-                        </Typography>
+                        <a href="https://t.me/coinexservice" target="_blank" rel="noopener noreferrer"
+                            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}
+                        >
+                            <SupportAgentRoundedIcon sx={{ fontSize: 50, color: isDarkTheme ? '#4caf50' : '#388e3c', transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.1)' } }} />
+                            <Typography
+                                variant="body1" component="div" sx={{ color: isDarkTheme ? '#4caf50' : '#388e3c', fontWeight: 'bold' }}>
+                                Support
+                            </Typography>
+                        </a>
                     </Grid>
                     <Grid item xs={4} display="flex" flexDirection="column" alignItems="center">
                         <GTranslateRoundedIcon sx={{ fontSize: 50, color: isDarkTheme ? '#f44336' : '#d32f2f', transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.1)' } }} />
