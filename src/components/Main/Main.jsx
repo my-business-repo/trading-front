@@ -13,6 +13,8 @@ import Profile from "../Profile/Profile";
 import Deposit from "../FrontMain/Deposit/Deposit";
 import DepositDetail from "../FrontMain/Deposit/DepositDetail";
 import TransactionList from "../Transaction/TransactionList";
+import DepositHistory from "../Transaction/DepositHistory";
+import WithdrawalHistory from "../Transaction/WithdrawalHistory";
 import MarketDetail from "../FrontMain/Market/MarketDetail";
 import HelpCenter from "../FrontMain/Help/HelpCenter";
 import TradeHistory from "../Trade/TradeHistory";
@@ -89,6 +91,8 @@ export default function Main() {
                         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                         <Route path='/deposit' element={<ProtectedRoute><Deposit /></ProtectedRoute>} />
                         <Route path='/deposit/:coin' element={<ProtectedRoute><DepositDetail /></ProtectedRoute>} />
+                        <Route path='/deposit-history' element={<ProtectedRoute><DepositHistory /></ProtectedRoute>} />
+                        <Route path='/withdrawal-history' element={<ProtectedRoute><WithdrawalHistory /></ProtectedRoute>} />
                         <Route path='/transactions' element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
                         <Route path='/market/:coin' element={<ProtectedRoute><MarketDetail /></ProtectedRoute>} />
                         <Route path='/help' element={<ProtectedRoute><HelpCenter /></ProtectedRoute>} />

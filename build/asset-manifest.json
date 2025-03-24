@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.30869fff.css",
-    "main.js": "/static/js/main.51f1b686.js",
+    "main.js": "/static/js/main.c05278a6.js",
     "static/media/slide3.jpg": "/static/media/slide3.66a9be59d340e7959df8.jpg",
     "static/media/slide2.jpg": "/static/media/slide2.ac2605b0e31bb34b8309.jpg",
     "static/media/help_center.png": "/static/media/help_center.294a4f58c832ec621ac2.png",
@@ -32,10 +32,10 @@
     "index.html": "/index.html",
     "static/media/ethereum-cryptocurrency.svg": "/static/media/ethereum-cryptocurrency.791b71cc046f1859643f415128690a22.svg",
     "main.30869fff.css.map": "/static/css/main.30869fff.css.map",
-    "main.51f1b686.js.map": "/static/js/main.51f1b686.js.map"
+    "main.c05278a6.js.map": "/static/js/main.c05278a6.js.map"
   },
   "entrypoints": [
     "static/css/main.30869fff.css",
-    "static/js/main.51f1b686.js"
+    "static/js/main.c05278a6.js"
   ]
 }

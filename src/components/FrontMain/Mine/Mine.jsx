@@ -46,8 +46,6 @@ export default function Mine() {
             window.open('https://t.me/coinexservice', '_blank');
         } else if (menuId === 10) {
             navigate('/help');
-        } else if (menuId === 4) {
-            navigate('/trade-history');
         } else if (menuId === 5) {
             navigate('/exchange-history');
         } else if (menuId === 12) {

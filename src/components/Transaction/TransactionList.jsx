@@ -3,12 +3,6 @@ import {
     Box,
     Container,
     Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
     Typography,
     TextField,
     Select,
@@ -19,16 +13,18 @@ import {
     InputLabel,
     FormControl,
     Button,
+    Stack,
+    Divider,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import DownloadIcon from '@mui/icons-material/Download';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import back icon
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { format } from 'date-fns';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import * as XLSX from 'xlsx';
 import { useAppContext } from '../../context/AppContext';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const statusColors = {
     PENDING: 'warning',
@@ -56,7 +52,7 @@ export default function TransactionList() {
         status: 'ALL'
     });
     const { theme } = useAppContext();
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchTransactions();
@@ -123,7 +119,18 @@ export default function TransactionList() {
     return (
         <Container maxWidth="md" sx={{ mt: { xs: 2, sm: 3 }, mb: 4, height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
             <ToastContainer />
-            <Paper elevation={3} sx={{ borderRadius: 2, overflow: 'hidden', flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: theme === 'dark' ? '#2c2c2c' : 'white' }}>
+            <Paper 
+                elevation={0} 
+                sx={{ 
+                    borderRadius: 2, 
+                    overflow: 'hidden', 
+                    flex: 1, 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    backgroundColor: theme === 'dark' ? '#2c2c2c' : 'white',
+                    border: theme === 'dark' ? '1px solid #404040' : '1px solid #e0e0e0'
+                }}
+            >
                 <Box sx={{ p: 2, backgroundColor: theme === 'dark' ? '#1e1e1e' : '#f8f9fa' }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                         <IconButton onClick={() => navigate(-1)} sx={{ color: theme === 'dark' ? 'white' : 'black' }}>
@@ -196,63 +203,76 @@ export default function TransactionList() {
                     </Box>
                 </Box>
 
-                <TableContainer sx={{ flex: 1 }}>
-                    <Table stickyHeader size="small">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell sx={{ backgroundColor: theme === 'dark' ? '#3c3c3c' : '#f5f5f5', color: theme === 'dark' ? 'white' : 'black' }}>ID</TableCell>
-                                <TableCell sx={{ backgroundColor: theme === 'dark' ? '#3c3c3c' : '#f5f5f5', color: theme === 'dark' ? 'white' : 'black' }}>Type</TableCell>
-                                <TableCell sx={{ backgroundColor: theme === 'dark' ? '#3c3c3c' : '#f5f5f5', color: theme === 'dark' ? 'white' : 'black' }}>Amount</TableCell>
-                                <TableCell sx={{ backgroundColor: theme === 'dark' ? '#3c3c3c' : '#f5f5f5', color: theme === 'dark' ? 'white' : 'black' }}>Status</TableCell>
-                                <TableCell sx={{ backgroundColor: theme === 'dark' ? '#3c3c3c' : '#f5f5f5', color: theme === 'dark' ? 'white' : 'black' }}>Date</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {filteredTransactions.map((transaction) => (
-                                <TableRow key={transaction.transactionId} hover>
-                                    <TableCell>
-                                        <Typography variant="body2" sx={{ fontSize: '0.8rem', color: theme === 'dark' ? 'white' : 'black' }}>
-                                            {transaction.transactionId}
+                <Box sx={{ flex: 1, overflow: 'auto', p: 2 }}>
+                    <Stack spacing={2}>
+                        {filteredTransactions.map((transaction) => (
+                            <Paper
+                                key={transaction.transactionId}
+                                elevation={0}
+                                sx={{
+                                    p: 2,
+                                    backgroundColor: theme === 'dark' ? '#3c3c3c' : '#fff',
+                                    borderRadius: 2,
+                                    border: theme === 'dark' ? '1px solid #404040' : '1px solid #e0e0e0'
+                                }}
+                            >
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
+                                    <Box>
+                                        <Typography variant="subtitle2" sx={{ color: theme === 'dark' ? '#fff' : '#000', mb: 0.5 }}>
+                                            {transaction.type}
                                         </Typography>
-                                        <Typography variant="caption" color="text.secondary" sx={{ color: theme === 'dark' ? 'grey' : 'black' }}>
-                                            {transaction.description}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Chip
-                                            label={transaction.type}
-                                            size="small"
-                                            sx={{
-                                                fontSize: '0.7rem',
-                                                backgroundColor: transaction.type === 'DEPOSIT' ? '#1e88e5' : '#ffb74d',
-                                                color: 'white'
-                                            }}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2" sx={{ fontWeight: 500, color: theme === 'dark' ? 'white' : 'black' }}>
-                                            {transaction.amount}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Chip
-                                            label={transaction.status}
-                                            size="small"
-                                            color={statusColors[transaction.status]}
-                                            sx={{ fontSize: '0.7rem' }}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="caption" sx={{ color: theme === 'dark' ? 'white' : 'black' }}>
+                                        <Typography variant="caption" sx={{ color: theme === 'dark' ? '#ccc' : '#666' }}>
                                             {formatDate(transaction.createdAt)}
                                         </Typography>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                                    </Box>
+                                    <Box>
+                                        <Typography variant="caption" sx={{ color: theme === 'dark' ? '#ccc' : '#666', display: 'block', textAlign: 'right', mb: 0.5 }}>
+                                            Amount:
+                                        </Typography>
+                                        <Typography variant="subtitle1" sx={{ color: theme === 'dark' ? '#fff' : '#000', fontWeight: 'bold' }}>
+                                            {transaction.amount} USDT
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                                
+                                <Divider sx={{ my: 1, borderColor: theme === 'dark' ? '#555' : '#eee' }} />
+                                
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+                                    <Box sx={{ maxWidth: '60%' }}>
+                                        <Typography 
+                                            variant="caption" 
+                                            sx={{ 
+                                                color: theme === 'dark' ? '#ccc' : '#666',
+                                                display: 'block',
+                                                mb: 0.5
+                                            }}
+                                        >
+                                            Address:
+                                        </Typography>
+                                        <Typography 
+                                            variant="caption" 
+                                            sx={{ 
+                                                color: theme === 'dark' ? '#aaa' : '#666',
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                                display: 'block'
+                                            }}
+                                        >
+                                            {transaction.transactionId}
+                                        </Typography>
+                                    </Box>
+                                    <Chip
+                                        label={transaction.status}
+                                        size="small"
+                                        color={statusColors[transaction.status]}
+                                        sx={{ fontSize: '0.7rem' }}
+                                    />
+                                </Box>
+                            </Paper>
+                        ))}
+                    </Stack>
+                </Box>
             </Paper>
         </Container>
     );
-} 
+}
