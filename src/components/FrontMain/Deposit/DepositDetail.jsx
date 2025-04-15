@@ -35,10 +35,10 @@ const VisuallyHiddenInput = styled('input')`
 `;
 
 const dummyAddresses = {
-    btc: 'bc1qxtrlrddw8pjr35vmxsp8w0qr9q3gqf5pletmt2',
-    eth: '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
-    usdt: '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
-    usdc: '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
+    btc: '1JFyRebm62ac1ufcFDvdTZ4Y1DhNamL37x',          // 'bc1qxtrlrddw8pjr35vmxsp8w0qr9q3gqf5pletmt2',
+    eth: '0x0a970dcfa3ea3a44f0eaa0ee23cfaad2c48498d4',  //'0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
+    usdt: '0x0a970dcfa3ea3a44f0eaa0ee23cfaad2c48498d4', // '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
+    usdc: '0x0a970dcfa3ea3a44f0eaa0ee23cfaad2c48498d4', //'0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
     ada: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
     sol: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
     xrp: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8'
@@ -128,7 +128,7 @@ export default function DepositDetail() {
                     Deposit {coin?.toUpperCase()}
                 </Typography>
 
-                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3, mt:6}}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3, mt: 6 }}>
                     <QRCodeCanvas value={address} size={140} level="H" />
                 </Box>
 
@@ -203,25 +203,25 @@ export default function DepositDetail() {
                         </Typography>
                         {previewUrl && (
                             <Box sx={{ mt: 2, maxWidth: '100%', overflow: 'hidden' }}>
-                                <img 
-                                    src={previewUrl} 
-                                    alt="Preview" 
-                                    style={{ 
-                                        width: '100%', 
+                                <img
+                                    src={previewUrl}
+                                    alt="Preview"
+                                    style={{
+                                        width: '100%',
                                         maxHeight: '200px',
                                         objectFit: 'contain',
                                         borderRadius: '4px'
-                                    }} 
+                                    }}
                                 />
                             </Box>
                         )}
                     </Box>
 
-                    <Alert severity="warning" sx={{ 
-                        mt: 1, 
-                        '& .MuiAlert-message': { 
-                            fontSize: '0.8rem', 
-                            color: theme === 'dark' ? '#ffffff' : '#000000' 
+                    <Alert severity="warning" sx={{
+                        mt: 1,
+                        '& .MuiAlert-message': {
+                            fontSize: '0.8rem',
+                            color: theme === 'dark' ? '#ffffff' : '#000000'
                         },
                         backgroundColor: theme === 'dark' ? '#333333' : '#f8f9fa'
                     }}>
@@ -231,7 +231,7 @@ export default function DepositDetail() {
                     <Button
                         variant="contained"
                         fullWidth
-                        sx={{ 
+                        sx={{
                             mt: 1,
                             borderRadius: 2,
                             textTransform: 'none',
@@ -250,10 +250,10 @@ export default function DepositDetail() {
                 </Box>
             </Paper>
 
-            <Dialog 
-                open={openDialog} 
-                onClose={() => setOpenDialog(false)} 
-                maxWidth="xs" 
+            <Dialog
+                open={openDialog}
+                onClose={() => setOpenDialog(false)}
+                maxWidth="xs"
                 fullWidth
                 PaperProps={{ sx: { borderRadius: 2, backgroundColor: theme === 'dark' ? '#1e1e1e' : '#ffffff' } }}
             >
@@ -283,13 +283,13 @@ export default function DepositDetail() {
                             fontSize: '0.8rem'
                         }}>
                             <Typography variant="body2" sx={{ mb: 0.5, color: theme === 'dark' ? '#ffffff' : '#000000' }}>
-                                 {transaction?.amount} {coin?.toUpperCase()}
+                                {transaction?.amount} {coin?.toUpperCase()}
                             </Typography>
                             <Typography variant="body2" sx={{ mb: 0.5, color: theme === 'dark' ? '#ffffff' : '#000000' }}>
-                                 {transaction?.description}
+                                {transaction?.description}
                             </Typography>
                             <Typography variant="body2" sx={{ color: theme === 'dark' ? '#ffffff' : '#000000' }}>
-                                 {new Date(transaction?.createdAt).toLocaleString()}
+                                {new Date(transaction?.createdAt).toLocaleString()}
                             </Typography>
                         </Box>
 
