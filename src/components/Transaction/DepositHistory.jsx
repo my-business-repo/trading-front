@@ -69,8 +69,10 @@ export default function DepositHistory() {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            // Filter only deposit transactions
-            const depositTransactions = response.data.allTransactions.filter(tx => tx.type === 'DEPOSIT');
+            // Filter only deposit transactions and sort by createdAt in descending order
+            const depositTransactions = response.data.allTransactions
+                .filter(tx => tx.type === 'DEPOSIT')
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setDeposits(depositTransactions);
         } catch (error) {
             toast.error('Failed to load deposit history');
@@ -93,6 +95,8 @@ export default function DepositHistory() {
             );
         }
 
+        // Ensure filtered deposits are also sorted by createdAt in descending order
+        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setFilteredDeposits(filtered);
     };
 
