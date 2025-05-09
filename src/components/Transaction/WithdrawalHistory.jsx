@@ -271,7 +271,7 @@ export default function WithdrawalHistory() {
                                             textAlign: 'center'
                                         }}
                                     >
-                                        {withdrawal.transactionId}
+                                        {withdrawal.address}
                                     </Typography>
                                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                         <Chip

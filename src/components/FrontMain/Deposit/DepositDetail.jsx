@@ -101,6 +101,8 @@ export default function DepositDetail() {
                 }
             });
 
+            console.log(formData);
+
             setTransaction(response.data.transaction);
             setOpenDialog(true);
             setAmount('');

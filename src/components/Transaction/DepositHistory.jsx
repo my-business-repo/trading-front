@@ -97,6 +97,10 @@ export default function DepositHistory() {
 
         // Ensure filtered deposits are also sorted by createdAt in descending order
         filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+
+        console.log(filtered)
+
         setFilteredDeposits(filtered);
     };
 
@@ -246,8 +250,8 @@ export default function DepositHistory() {
                                         color: theme === 'dark' ? '#fff' : '#000',
                                         fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                         textAlign: 'center'
-                                    }}>
-                                        {deposit.currency || 'USDT'}
+                                    }}> 
+                                        {deposit.currency  ? deposit.currency.toUpperCase() : 'USDT'}
                                     </Typography>
                                     <Typography variant="body2" sx={{ 
                                         color: theme === 'dark' ? '#fff' : '#000',
@@ -262,7 +266,7 @@ export default function DepositHistory() {
                                         fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                         textAlign: 'center'
                                     }}>
-                                        {deposit.amount} {deposit.currency || 'USDT'}
+                                        {deposit.amount} {deposit.currency  ? deposit.currency.toUpperCase() : 'USDT'}
                                     </Typography>
                                     <Typography 
                                         variant="body2" 
