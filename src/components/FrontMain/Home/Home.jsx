@@ -156,7 +156,7 @@ export default function Home() {
                         </Typography>
                     </Grid>
                     <Grid item xs={4} display="flex" flexDirection="column" alignItems="center">
-                        <a href="https://t.me/coinexservice" target="_blank" rel="noopener noreferrer"
+                        <a href="https://t.me/Coinex6633" target="_blank" rel="noopener noreferrer"
                             style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}
                         >
                             <SupportAgentRoundedIcon sx={{ fontSize: 50, color: isDarkTheme ? '#4caf50' : '#388e3c', transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.1)' } }} />
