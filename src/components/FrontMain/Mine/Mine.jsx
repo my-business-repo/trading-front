@@ -43,7 +43,8 @@ export default function Mine() {
         if (menuId === 3) {
             navigate('/orders');
         } else if (menuId === 9 && menuName === 'Online Customer Service') {
-            window.open('https://t.me/Coinex6633', '_blank');
+            // window.open('https://t.me/Coinex6633', '_blank');
+            navigate('/online/help');
         } else if (menuId === 10) {
             navigate('/help');
         } else if (menuId === 5) {

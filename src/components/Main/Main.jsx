@@ -30,6 +30,8 @@ import BottomNavi from "../BottomNavi/BottomNavi";
 import GeneralSettings from "../FrontMain/Settings/GeneralSettings";
 import SetFundPassword from "../FrontMain/Settings/SetFundPassword";
 import ModifyFundPassword from "../FrontMain/Settings/ModifyFundPassword";
+import MainCustomer from "../FrontMain/CustomerService/MainCustomer";
+import Chat from "../FrontMain/CustomerService/chatting/Chat";
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -96,6 +98,8 @@ export default function Main() {
                         <Route path='/transactions' element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
                         <Route path='/market/:coin' element={<ProtectedRoute><MarketDetail /></ProtectedRoute>} />
                         <Route path='/help' element={<ProtectedRoute><HelpCenter /></ProtectedRoute>} />
+                        <Route path='/online/help' element={<ProtectedRoute><MainCustomer /></ProtectedRoute>} />
+                        <Route path='/online/help/chatting' element={<ProtectedRoute><Chat /></ProtectedRoute>} />
                         <Route path='/trade-history' element={<ProtectedRoute><TradeHistory /></ProtectedRoute>} />
                         <Route path='/withdraw' element={<ProtectedRoute><WithdrawDetail /></ProtectedRoute>} />
                         <Route path='/exchange-history' element={<ProtectedRoute><ExchangeHistory /></ProtectedRoute>} />
