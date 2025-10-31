@@ -51,7 +51,15 @@ export default function AssetCard({ data, theme }) {
                         }
                     });
                     const price = response.data.USD;
-                    const totalValue = (parseFloat(data.available) * price).toFixed(2);
+
+                    let totalValue = 0;
+
+                    if (price) {
+                        totalValue = (parseFloat(data.available) * price).toFixed(2);
+                    } 
+
+                    console.log("estimated value::",totalValue,"price::",price,":reponse::",response);
+
                     setEstimatedValue(`${totalValue} USD`);
                 } catch (error) {
                     console.error('Error fetching estimated value:', error);

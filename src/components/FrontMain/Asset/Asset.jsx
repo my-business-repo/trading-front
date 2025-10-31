@@ -15,7 +15,7 @@ import { useAppContext } from "../../../context/AppContext";
 export default function Asset() {
     const [value, setValue] = useState(0);
     const [showBalance, setShowBalance] = useState(true);
-    const {assetCtx, setAssetCtx} = useAppContext();
+    const { assetCtx, setAssetCtx } = useAppContext();
     const [assets, setAssets] = useState(assetCtx);
     const [totalBalance, setTotalBalance] = useState(0);
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ export default function Asset() {
         {
             accountNo: "DEFAULT_ETH",
             balance: "0",
-            inreview_balance: "0", 
+            inreview_balance: "0",
             currency: "ETH",
             isActive: true
         },
@@ -62,7 +62,7 @@ export default function Asset() {
                     }
                 });
                 const accounts = response.data.data.accounts;
-                
+
                 if (!accounts || accounts.length === 0) {
                     setAssets(mockAssets);
                     setTotalBalance("0.00");
@@ -72,7 +72,10 @@ export default function Asset() {
                 // Add default crypto assets if not present
                 const cryptos = ['BTC', 'ETH', 'USDT', 'USDC'];
                 const allAssets = [...accounts];
-                
+
+
+                console.log("all assets::", allAssets)
+
                 cryptos.forEach(crypto => {
                     if (!accounts.find(a => a.currency.toUpperCase() === crypto)) {
                         allAssets.push({
@@ -96,9 +99,12 @@ export default function Asset() {
                                 `https://min-api.cryptocompare.com/data/price?fsym=${account.currency}&tsyms=USD`
                             );
                             const usdPrice = priceResponse.data.USD;
-                            return parseFloat(account.balance) * usdPrice;
+                            if (usdPrice)
+                                return parseFloat(account.balance) * usdPrice;
+                            else
+                                return 0;
                         } catch (error) {
-                            console.error(`Error fetching price for ${account.currency}:`, error);
+                            console.log(`Error fetching price for ${account.currency}:`, error);
                             return parseFloat(account.balance);
                         }
                     }
@@ -161,9 +167,9 @@ export default function Asset() {
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-around', marginBottom: 1 }}>
                     <Box>
-                        <Box 
+                        <Box
                             onClick={() => navigate('/deposit')}
-                            sx={{ 
+                            sx={{
                                 cursor: 'pointer',
                                 textDecoration: 'none',
                                 display: 'flex',
@@ -179,7 +185,7 @@ export default function Asset() {
                     <Box>
                         <Box
                             onClick={() => navigate('/withdraw')}
-                            sx={{ 
+                            sx={{
                                 cursor: 'pointer',
                                 textDecoration: 'none',
                                 display: 'flex',
@@ -197,7 +203,7 @@ export default function Asset() {
                             onClick={() => {
                                 navigate('/trade/1');
                             }}
-                            sx={{ 
+                            sx={{
                                 cursor: 'pointer',
                                 textDecoration: 'none',
                                 display: 'flex',
@@ -212,8 +218,8 @@ export default function Asset() {
                 </Box>
             </Box>
 
-            {assets && (value === 0 ? 
-                <AccountAsset assets={assets} showBalance={showBalance} theme={theme} /> 
+            {assets && (value === 0 ?
+                <AccountAsset assets={assets} showBalance={showBalance} theme={theme} />
                 : <CoinAsset assets={assets} showBalance={showBalance} theme={theme} />)}
 
         </Box>
