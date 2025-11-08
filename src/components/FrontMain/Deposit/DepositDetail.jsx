@@ -35,13 +35,14 @@ const VisuallyHiddenInput = styled('input')`
 `;
 
 const dummyAddresses = {
-    btc: '1JFyRebm62ac1ufcFDvdTZ4Y1DhNamL37x',          // 'bc1qxtrlrddw8pjr35vmxsp8w0qr9q3gqf5pletmt2',
-    eth: '0x0a970dcfa3ea3a44f0eaa0ee23cfaad2c48498d4',  //'0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
-    usdt: '0x0a970dcfa3ea3a44f0eaa0ee23cfaad2c48498d4', // '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
-    usdc: '0x0a970dcfa3ea3a44f0eaa0ee23cfaad2c48498d4', //'0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
-    ada: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
-    sol: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
-    xrp: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8'
+    btc: 'bc1q6lrj9cg96knyfm4s3jlfhffysru4s5udd5r8yy',          // 'bc1qxtrlrddw8pjr35vmxsp8w0qr9q3gqf5pletmt2',
+    eth: '0x204284B6BAd90DA8f92A0821b3e4A5A4d087802E',  //'0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
+    usdt: '0x204284B6BAd90DA8f92A0821b3e4A5A4d087802E', // '0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
+    usdc: '0x204284B6BAd90DA8f92A0821b3e4A5A4d087802E', //'0x1A1260Dc8F60d6b43FbC980904b925593012cE59',
+    ada: '0x7c42f2bca4dff459a3c98a36a004147117fb2d09',
+    sol: '9unFZygjQnM9Enwtq9efHyeFRYDg55VpZyLnsc8bHDR5',
+    xrp: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
+    doge: 'DHerMJKwomHPnG1HEKv4Kh15unN8N2N318'
 };
 
 export default function DepositDetail() {

@@ -7,8 +7,10 @@ import BtcIcon from '../../../images/coin-icons/bitcoin-cryptocurrency.svg';
 import AdaIcon from '../../../images/coin-icons/ada.png';
 import SolIcon from '../../../images/coin-icons/sol.png';
 import XrpIcon from '../../../images/coin-icons/xrp.png';
+import DogeIcon from '../../../images/coin-icons/doge.png';
 import { useAppContext } from '../../../context/AppContext';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+
 
 const coins = [
     { id: 1, name: 'USDT', icon: UsdtIcon, network: 'ERC20' },
@@ -18,6 +20,7 @@ const coins = [
     { id: 5, name: 'ADA', icon: AdaIcon, network: 'BNB' },
     { id: 6, name: 'SOL', icon: SolIcon, network: 'OFFICIAL TRUMP' },
     { id: 7, name: 'XRP', icon: XrpIcon, network: 'XRP' },
+    { id: 8, name: 'DOGE', icon: DogeIcon, network: 'DOGE' },
 ];
 
 export default function Deposit() {
