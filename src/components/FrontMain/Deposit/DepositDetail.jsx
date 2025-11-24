@@ -42,7 +42,8 @@ const dummyAddresses = {
     ada: '0x7c42f2bca4dff459a3c98a36a004147117fb2d09',
     sol: '9unFZygjQnM9Enwtq9efHyeFRYDg55VpZyLnsc8bHDR5',
     xrp: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
-    doge: 'DHerMJKwomHPnG1HEKv4Kh15unN8N2N318'
+    doge: 'DHerMJKwomHPnG1HEKv4Kh15unN8N2N318',
+    $zec: 't1L9CbUg3kR7jay6tyixsbwVt5qhRF8PxDG'
 };
 
 export default function DepositDetail() {

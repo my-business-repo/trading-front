@@ -8,6 +8,7 @@ import AdaIcon from '../../../images/coin-icons/ada.png';
 import SolIcon from '../../../images/coin-icons/sol.png';
 import XrpIcon from '../../../images/coin-icons/xrp.png';
 import DogeIcon from '../../../images/coin-icons/doge.png';
+import ZecIcon from '../../../images/coin-icons/zec-coin.png';
 import { useAppContext } from '../../../context/AppContext';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
@@ -21,6 +22,7 @@ const coins = [
     { id: 6, name: 'SOL', icon: SolIcon, network: 'OFFICIAL TRUMP' },
     { id: 7, name: 'XRP', icon: XrpIcon, network: 'XRP' },
     { id: 8, name: 'DOGE', icon: DogeIcon, network: 'DOGE' },
+    { id: 9, name: '$ZEC', icon: ZecIcon, network: 'ZEC' },
 ];
 
 export default function Deposit() {
@@ -28,9 +30,9 @@ export default function Deposit() {
     const { theme } = useAppContext();
 
     return (
-        <Container height='100%' maxWidth="sm" sx={{ mt: 2, mb: 2, backgroundColor: theme === 'dark' ? '#121212' : '#ffffff', borderRadius: 2, p: 2 ,border:'1px solid #bb86fc'}}>
-            <IconButton 
-                onClick={() => navigate("/")} 
+        <Container height='100%' maxWidth="sm" sx={{ mt: 2, mb: 2, backgroundColor: theme === 'dark' ? '#121212' : '#ffffff', borderRadius: 2, p: 2, border: '1px solid #bb86fc' }}>
+            <IconButton
+                onClick={() => navigate("/")}
                 sx={{ mb: 2, color: theme === 'dark' ? '#bb86fc' : '#6200ea', borderColor: theme === 'dark' ? '#bb86fc' : '#6200ea' }}
             >
                 <KeyboardArrowLeftIcon />
@@ -41,7 +43,7 @@ export default function Deposit() {
             <Grid container spacing={2}>
                 {coins.map((coin) => (
                     <Grid item xs={12} key={coin.id}>
-                        <Paper 
+                        <Paper
                             elevation={3}
                             sx={{
                                 p: 2,
@@ -56,8 +58,8 @@ export default function Deposit() {
                             onClick={() => navigate(`/deposit/${coin.name.toLowerCase()}`)}
                         >
                             <Box display="flex" alignItems="center" gap={1}>
-                                <img 
-                                    src={coin.icon} 
+                                <img
+                                    src={coin.icon}
                                     alt={coin.name}
                                     style={{ width: 32, height: 32 }}
                                 />
