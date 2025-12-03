@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAppContext } from "../../../context/AppContext";
-import LogoImg from "../../../images/logo.jpg";
+// import LogoImg from "../../../images/logo.jpg";
+import LogoImg from "../../../images/user-logo.png";
+
 
 export default function Mine() {
     const navigate = useNavigate();
