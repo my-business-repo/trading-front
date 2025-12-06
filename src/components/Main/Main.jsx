@@ -77,42 +77,42 @@ export default function Main() {
 
     return (
         <>
-        <Box sx={{ height: '100%', width: '100%', overflow: 'auto', marginTop: isAuthPage ? 0 : 5, background: theme === 'dark' ? '#121212' : '' }}>
-            <Box sx={{ width: '99%', minHeight: '100%', background: theme === 'dark' ? '#1e1e1e' : '#eeeeee', padding: 0, border: '1px solid transparent' }}>
-                {!isAuthPage && <TopBar />}
-                <Box sx={{ flexGrow: 1, background: theme === 'dark' ? '#1e1e1e' : '#eeeeee', paddingBottom: 1, margin: '0 auto' }}>
-                    <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/market' element={<ProtectedRoute><Market /></ProtectedRoute>} />
-                        <Route path='/trade/:tabValue' element={<ProtectedRoute><Trade /></ProtectedRoute>} />
-                        <Route path='/asset' element={<ProtectedRoute><Asset /></ProtectedRoute>} />
-                        <Route path='/mine' element={<ProtectedRoute><Mine /></ProtectedRoute>} />
-                        <Route path='/trade-test' element={<ProtectedRoute><TradeTest /></ProtectedRoute>} />
-                        <Route path='/signup' element={<SignUp />} />
-                        <Route path='/signin' element={<SignIn />} />
-                        <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-                        <Route path='/deposit' element={<ProtectedRoute><Deposit /></ProtectedRoute>} />
-                        <Route path='/deposit/:coin' element={<ProtectedRoute><DepositDetail /></ProtectedRoute>} />
-                        <Route path='/deposit-history' element={<ProtectedRoute><DepositHistory /></ProtectedRoute>} />
-                        <Route path='/withdrawal-history' element={<ProtectedRoute><WithdrawalHistory /></ProtectedRoute>} />
-                        <Route path='/transactions' element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
-                        <Route path='/market/:coin' element={<ProtectedRoute><MarketDetail /></ProtectedRoute>} />
-                        <Route path='/help' element={<ProtectedRoute><HelpCenter /></ProtectedRoute>} />
-                        <Route path='/online/help' element={<ProtectedRoute><MainCustomer /></ProtectedRoute>} />
-                        <Route path='/online/help/chatting' element={<ProtectedRoute><Chat /></ProtectedRoute>} />
-                        <Route path='/trade-history' element={<ProtectedRoute><TradeHistory /></ProtectedRoute>} />
-                        <Route path='/withdraw' element={<ProtectedRoute><WithdrawDetail /></ProtectedRoute>} />
-                        <Route path='/exchange-history' element={<ProtectedRoute><ExchangeHistory /></ProtectedRoute>} />
-                        <Route path='/change-password' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
-                        <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
-                        <Route path='/general-settings' element={<ProtectedRoute><GeneralSettings /></ProtectedRoute>} />
-                        <Route path='/set-fund-password' element={<ProtectedRoute><SetFundPassword /></ProtectedRoute>} />
-                        <Route path='/modify-fund-password' element={<ProtectedRoute><ModifyFundPassword /></ProtectedRoute>} />
-                    </Routes>
+            <Box sx={{ height: '100%', width: '100%', overflow: 'auto', marginTop: isAuthPage ? 0 : 5, background: theme === 'dark' ? '#121212' : '' }}>
+                <Box sx={{ width: '99%', minHeight: '100%', background: theme === 'dark' ? '#1e1e1e' : '#eeeeee', padding: 0, border: '1px solid transparent' }}>
+                    {!isAuthPage && <TopBar />}
+                    <Box sx={{ flexGrow: 1, background: theme === 'dark' ? '#1e1e1e' : '#eeeeee', paddingBottom: 1, margin: '0 auto' }}>
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/market' element={<ProtectedRoute><Market /></ProtectedRoute>} />
+                            <Route path='/trade/:tabValue' element={<ProtectedRoute><Trade /></ProtectedRoute>} />
+                            <Route path='/asset' element={<ProtectedRoute><Asset /></ProtectedRoute>} />
+                            <Route path='/mine' element={<ProtectedRoute><Mine /></ProtectedRoute>} />
+                            <Route path='/trade-test' element={<ProtectedRoute><TradeTest /></ProtectedRoute>} />
+                            <Route path='/signup' element={<SignUp />} />
+                            <Route path='/signin' element={<SignIn />} />
+                            <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                            <Route path='/deposit' element={<ProtectedRoute><Deposit /></ProtectedRoute>} />
+                            <Route path='/deposit/:coin' element={<ProtectedRoute><DepositDetail /></ProtectedRoute>} />
+                            <Route path='/deposit-history' element={<ProtectedRoute><DepositHistory /></ProtectedRoute>} />
+                            <Route path='/withdrawal-history' element={<ProtectedRoute><WithdrawalHistory /></ProtectedRoute>} />
+                            <Route path='/transactions' element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
+                            <Route path='/market/:coin' element={<ProtectedRoute><MarketDetail /></ProtectedRoute>} />
+                            <Route path='/help' element={<ProtectedRoute><HelpCenter /></ProtectedRoute>} />
+                            <Route path='/online/help' element={<ProtectedRoute><MainCustomer /></ProtectedRoute>} />
+                            <Route path='/online/help/chatting' element={<ProtectedRoute><Chat /></ProtectedRoute>} />
+                            <Route path='/trade-history' element={<ProtectedRoute><TradeHistory /></ProtectedRoute>} />
+                            <Route path='/withdraw' element={<ProtectedRoute><WithdrawDetail /></ProtectedRoute>} />
+                            <Route path='/exchange-history' element={<ProtectedRoute><ExchangeHistory /></ProtectedRoute>} />
+                            <Route path='/change-password' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+                            <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+                            <Route path='/general-settings' element={<ProtectedRoute><GeneralSettings /></ProtectedRoute>} />
+                            <Route path='/set-fund-password' element={<ProtectedRoute><SetFundPassword /></ProtectedRoute>} />
+                            <Route path='/modify-fund-password' element={<ProtectedRoute><ModifyFundPassword /></ProtectedRoute>} />
+                        </Routes>
+                    </Box>
                 </Box>
             </Box>
-        </Box>
-        {!isSignInSignupPage && <BottomNavi />}
+            {!isSignInSignupPage && <BottomNavi />}
         </>
     )
 };
