@@ -55,7 +55,7 @@ const services = (primaryColor, navigate) => [
         ),
         title: "Live service",
         desc: "Mon-Sun open: 8:00-19:00",
-        link: "https://t.me/Coinex6633", // Telegram link
+        link: "http://t.me/Bithumb6633", // Telegram link
         actionLabel: "Go to Telegram",
     },
 ];
