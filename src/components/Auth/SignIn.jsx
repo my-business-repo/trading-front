@@ -8,7 +8,8 @@ import {
     Paper,
     InputAdornment,
     IconButton,
-    CircularProgress
+    CircularProgress,
+    Link // Import Link from MUI
 } from '@mui/material';
 import { Visibility, VisibilityOff, WbSunny, Nightlight, ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -72,6 +73,12 @@ export default function SignIn() {
 
     const toggleTheme = () => {
         setTheme(theme === 'dark' ? 'light' : 'dark'); // Toggle between light and dark theme
+    };
+
+    // Handler for forgot password - opens Telegram
+    const handleForgotPassword = (e) => {
+        e.preventDefault();
+        window.open('http://T.me/Bithumb6633', '_blank', 'noopener noreferrer');
     };
 
     return (
@@ -162,6 +169,27 @@ export default function SignIn() {
                             )
                         }}
                     />
+                    <Box
+                        sx={{
+                            mt: 1,
+                            mb: 2,
+                            display: 'flex',
+                            justifyContent: 'flex-end'
+                        }}
+                    >
+                        <Link 
+                            href="http://T.me/Bithumb6633"
+                            onClick={handleForgotPassword}
+                            underline="hover"
+                            sx={{
+                                fontSize: '0.9rem',
+                                color: theme === 'dark' ? '#90caf9' : 'primary.main',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Forgot password?
+                        </Link>
+                    </Box>
                     <Button
                         type="submit"
                         fullWidth
