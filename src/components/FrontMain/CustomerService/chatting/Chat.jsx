@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
     Box,
     Typography,
@@ -6,30 +6,31 @@ import {
     Button,
     Paper,
     IconButton,
+    Tooltip,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState("");
     const [loading, setLoading] = useState(false);
     const [connected] = useState(true); // always "connected" in mock
+    const [imageFile, setImageFile] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const chatBottomRef = useRef(null);
+    const fileInputRef = useRef(null);
 
     // Track previous message count
     const prevMessagesCountRef = useRef(0);
 
     // Scroll to bottom when messages increase or receive
     useEffect(() => {
-        if (
-            messages.length > prevMessagesCountRef.current
-        ) {
-            // Message count increased, scroll to bottom
+        if (messages.length > prevMessagesCountRef.current) {
             if (chatBottomRef.current) {
                 chatBottomRef.current.scrollIntoView({ behavior: "smooth" });
             }
         }
-        // Update previous count
         prevMessagesCountRef.current = messages.length;
     }, [messages]);
 
@@ -47,16 +48,11 @@ const Chat = () => {
                     "Authorization": `Bearer ${token}`
                 }
             });
-
-            console.log(response);
-
             if (response.ok) {
                 const dt = await response.json();
-                console.log(dt.data);
                 setMessages(dt.data);
             }
-        } catch (err) {
-        }
+        } catch (err) {}
     };
 
     // Poll the message count every 3 seconds.
@@ -78,7 +74,6 @@ const Chat = () => {
                 });
                 if (response.ok) {
                     const dt = await response.json();
-                    console.log("count:::", dt);
                     if (typeof dt.data.count === "number") {
                         if (prevCount === null) {
                             prevCount = dt.data.count;
@@ -88,8 +83,7 @@ const Chat = () => {
                         }
                     }
                 }
-            } catch (err) {
-            }
+            } catch (err) {}
         };
 
         intervalId = setInterval(fetchMessageCount, 3000);
@@ -104,36 +98,85 @@ const Chat = () => {
     }, []);
 
     const sendMessage = () => {
-        console.log("message send:", messageInput);
-        // Send customer message to API and update messages on success
-        if (!messageInput.trim()) return;
+        // Block UI if neither text nor valid file
+        if (!messageInput.trim() && !imageFile) return;
         setLoading(true);
         const API_URL = process.env.REACT_APP_API_URL;
         const token = localStorage.getItem("token");
-        fetch(`${API_URL}/api/v1/customer/message`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({ content: messageInput }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    await fetchMessages();
-                    setMessageInput("");
-                } else {
-                }
+
+        // If sending an image:
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append("type", "IMAGE");
+            formData.append("file", imageFile);
+
+            fetch(`${API_URL}/api/v1/customer/message/image`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData,
             })
-            .catch((err) => {
+                .then(async (response) => {
+                    if (response.ok) {
+                        await fetchMessages();
+                        setMessageInput("");
+                        setImageFile(null);
+                        setImagePreview(null);
+                        if (fileInputRef.current) {
+                            fileInputRef.current.value = "";
+                        }
+                    }
+                })
+                .catch((err) => {})
+                .finally(() => {
+                    setLoading(false);
+                });
+        } else {
+            // Just text message as before
+            fetch(`${API_URL}/api/v1/customer/message`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ content: messageInput }),
             })
-            .finally(() => {
-                setLoading(false);
-            });
+                .then(async (response) => {
+                    if (response.ok) {
+                        await fetchMessages();
+                        setMessageInput("");
+                    }
+                })
+                .catch((err) => {})
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
     };
 
     const handleBack = () => {
         window.history.back();
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImageFile(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleRemoveImage = () => {
+        setImageFile(null);
+        setImagePreview(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
     };
 
     return (
@@ -231,17 +274,33 @@ const Chat = () => {
                                     color: isCustomer ? "#000" : "#333",
                                     maxWidth: "70%",
                                     boxShadow: "0 1px 4px rgba(70,70,70,0.05)",
+                                    wordBreak: 'break-word',
                                 }}
                             >
-                                <Typography
-                                    sx={{
-                                        fontSize: "1rem",
-                                        whiteSpace: "pre-line",
-                                        wordBreak: "break-word",
-                                    }}
-                                >
-                                    {msg.content}
-                                </Typography>
+                                {msg.type === "IMAGE" ? (
+                                    // Render image content
+                                    <img
+                                        src={msg.content}
+                                        alt="chat-img"
+                                        style={{
+                                            maxWidth: "100%",
+                                            maxHeight: 300,
+                                            borderRadius: 8,
+                                            display: 'block',
+                                        }}
+                                    />
+                                ) : (
+                                    // Render text content (default/text)
+                                    <Typography
+                                        sx={{
+                                            fontSize: "1rem",
+                                            whiteSpace: "pre-line",
+                                            wordBreak: "break-word",
+                                        }}
+                                    >
+                                        {msg.content}
+                                    </Typography>
+                                )}
                             </Box>
                             <Typography
                                 sx={{
@@ -276,6 +335,37 @@ const Chat = () => {
                     background: "#fff",
                 }}
             >
+                {/* Image preview, if uploading */}
+                {imagePreview && (
+                    <Box
+                        sx={{
+                            mr: 2,
+                            position: 'relative',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <img src={imagePreview} alt="preview" style={{
+                            height: 36,
+                            width: 48,
+                            objectFit: 'cover',
+                            borderRadius: 6,
+                            border: '1px solid #aaa',
+                        }} />
+                        <Button size="small" color="error" onClick={handleRemoveImage} sx={{
+                            ml: 1,
+                            minWidth: 0,
+                            px: 1,
+                            fontSize: 11,
+                            fontWeight: 700,
+                            lineHeight: 1.2,
+                            textTransform: 'none',
+                        }}>
+                            Remove
+                        </Button>
+                    </Box>
+                )}
+
                 <TextField
                     fullWidth
                     variant="outlined"
@@ -286,14 +376,46 @@ const Chat = () => {
                     onKeyDown={(e) => {
                         if (e.key === "Enter") sendMessage();
                     }}
-                    disabled={!connected || loading}
+                    disabled={!connected || loading || Boolean(imageFile)}
+                    sx={{ mr: 1 }}
                 />
+                {/* Image upload button */}
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    onChange={handleFileChange}
+                    disabled={!connected || loading}
+                    data-testid="chat-image-input"
+                />
+                <Tooltip title="Attach image">
+                    <span>
+                        <IconButton
+                            color={imageFile ? "secondary" : "primary"}
+                            onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                            disabled={!connected || loading}
+                            component="span"
+                            sx={{
+                                ml: 0,
+                                mr: 1,
+                                ...(imageFile && { bgcolor: "#f8e1ff" }),
+                            }}
+                        >
+                            <PhotoCamera />
+                        </IconButton>
+                    </span>
+                </Tooltip>
                 <Button
                     variant="contained"
                     color="primary"
-                    sx={{ ml: 2, minWidth: 78 }}
+                    sx={{ minWidth: 78 }}
                     onClick={sendMessage}
-                    disabled={!connected || loading || !messageInput.trim()}
+                    disabled={
+                        !connected ||
+                        loading ||
+                        (!messageInput.trim() && !imageFile)
+                    }
                 >
                     Send
                 </Button>
