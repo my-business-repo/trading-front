@@ -52,7 +52,7 @@ const Chat = () => {
                 const dt = await response.json();
                 setMessages(dt.data);
             }
-        } catch (err) {}
+        } catch (err) { }
     };
 
     // Poll the message count every 3 seconds.
@@ -83,7 +83,7 @@ const Chat = () => {
                         }
                     }
                 }
-            } catch (err) {}
+            } catch (err) { }
         };
 
         intervalId = setInterval(fetchMessageCount, 3000);
@@ -128,7 +128,7 @@ const Chat = () => {
                         }
                     }
                 })
-                .catch((err) => {})
+                .catch((err) => { })
                 .finally(() => {
                     setLoading(false);
                 });
@@ -148,7 +148,7 @@ const Chat = () => {
                         setMessageInput("");
                     }
                 })
-                .catch((err) => {})
+                .catch((err) => { })
                 .finally(() => {
                     setLoading(false);
                 });
