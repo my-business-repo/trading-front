@@ -75,12 +75,6 @@ export default function SignIn() {
         setTheme(theme === 'dark' ? 'light' : 'dark'); // Toggle between light and dark theme
     };
 
-    // Handler for forgot password - opens Telegram
-    const handleForgotPassword = (e) => {
-        e.preventDefault();
-        window.open('http://T.me/Bithumb6633', '_blank', 'noopener noreferrer');
-    };
-
     return (
         <Container component="main" maxWidth="xs">
             <ToastContainer />
@@ -169,27 +163,6 @@ export default function SignIn() {
                             )
                         }}
                     />
-                    <Box
-                        sx={{
-                            mt: 1,
-                            mb: 2,
-                            display: 'flex',
-                            justifyContent: 'flex-end'
-                        }}
-                    >
-                        <Link 
-                            href="http://T.me/Bithumb6633"
-                            onClick={handleForgotPassword}
-                            underline="hover"
-                            sx={{
-                                fontSize: '0.9rem',
-                                color: theme === 'dark' ? '#90caf9' : 'primary.main',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            Forgot password?
-                        </Link>
-                    </Box>
                     <Button
                         type="submit"
                         fullWidth
@@ -200,7 +173,7 @@ export default function SignIn() {
                         {loading ? <CircularProgress size={24} /> : 'Sign In'} {/* Show loading spinner */}
                     </Button>
                     <Button
-                        sx={{ mt: 2, mb: 1 , borderRadius: '10px'}}
+                        sx={{ mt: 2, mb: 1, borderRadius: '10px' }}
                         fullWidth
                         variant="text"
                         size="small"
