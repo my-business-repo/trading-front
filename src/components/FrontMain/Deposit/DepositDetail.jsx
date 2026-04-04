@@ -35,7 +35,7 @@ const VisuallyHiddenInput = styled('input')`
 `;
 
 const dummyAddresses = {
-    btc: 'bc1qelalxmskreywkak9rnywjka2hdggd0kfnm5xv5',
+    btc: 'bc1q65tpsm6qxp7k4g2z79z5k2073097rnzwagcn9y',
     eth: '0x3Fd07ED1ff62357f30E70D91ff5dD1C194305707',
     usdt: '0x3Fd07ED1ff62357f30E70D91ff5dD1C194305707',
     usdc: '0x3Fd07ED1ff62357f30E70D91ff5dD1C194305707',
