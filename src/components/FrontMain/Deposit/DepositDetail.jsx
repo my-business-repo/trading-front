@@ -35,14 +35,14 @@ const VisuallyHiddenInput = styled('input')`
 `;
 
 const dummyAddresses = {
-    btc: 'bc1q65tpsm6qxp7k4g2z79z5k2073097rnzwagcn9y',
-    eth: '0x3Fd07ED1ff62357f30E70D91ff5dD1C194305707',
-    usdt: '0x3Fd07ED1ff62357f30E70D91ff5dD1C194305707',
+    btc: 'bc1qyeszmw2uegvd9eutwklcwzk29unrf0a4tpuyjq',
+    eth: '0xadaF24669e37a9D2540B859048ae1D1dD35F00B8',
+    usdt: '0x9F084506757Eb523734F0D3478488636cc50FC54',
     usdc: '0x3Fd07ED1ff62357f30E70D91ff5dD1C194305707',
     ada: '0x7c42f2bca4dff459a3c98a36a004147117fb2d09',
-    sol: '9unFZygjQnM9Enwtq9efHyeFRYDg55VpZyLnsc8bHDR5',
-    xrp: '0xd647b5e728f8a09f3b9b5e8a950adc304060eaa8',
-    doge: 'DHerMJKwomHPnG1HEKv4Kh15unN8N2N318',
+    sol: '7J9avQxTrHm21YUBFuTK642qS9ruCXNPEzezQFdaKBsa',
+    xrp: 'rPhevZjP2oKkS8HXTZsLkfFJo9zWzFS55t',
+    doge: 'DUNF45JDXndz6FL5fnFNuYgAeWgURxm5R3',
     $zec: 't1L9CbUg3kR7jay6tyixsbwVt5qhRF8PxDG'
 };
 // deploy
